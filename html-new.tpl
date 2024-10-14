@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fancy Trivy Report - {{ now }}</title>
+  <title>{{- escapeXML ( index . 0 ).Target }} - Trivy Report - {{ now }}</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -35,6 +35,7 @@
     th, td {
       padding: 12px;
       border-bottom: 1px solid #ddd;
+      text-align: left;
     }
     th {
       background: #f7f7f7;
@@ -163,17 +164,4 @@
       <td class="severity">{{ escapeXML .Severity }}</td>
       <td style="white-space:normal;">
         {{ escapeXML .Message }}<br>
-        <a href={{ escapeXML .PrimaryURL | printf "%q" }}>{{ escapeXML .PrimaryURL }}</a>
-      </td>
-    </tr>
-    {{- end }}
-    {{- end }}
-    {{- end }}
-  </table>
-  {{- else }}
-  <header>
-    <h1>Trivy Returned Empty Report</h1>
-  </header>
-  {{- end }}
-</body>
-</html>
+        <a href={{ escapeXML .PrimaryURL | printf "%q" }}>{{ escapeXML .PrimaryURL }}</
